@@ -1,0 +1,63 @@
+<!-- Button trigger modal -->
+<div class="d-flex justify-content-end">
+  <button type="button"
+  class="btn btn-primary m-2"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+  (click)="addClick()"
+  data-backdrop="static"
+  data-keyboard="false">
+Add Department
+</button>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">{{ModalTitle}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"  (click)="closeClick()"></button>
+        </div>
+        <div class="modal-body">
+            <app-add-edit-dep [dep]="dep" *ngIf="ActivatAddEditDepComp"></app-add-edit-dep>
+          </div>  
+      </div>
+  
+    </div>
+  </div>
+<table class="table table-dark table-striped-columns">
+<thead>
+    <tr>
+        <th>
+          <div class="d-flex flex-row">
+            <input [(ngModel)]="departementIdFilter" class="form-control" (keyup)="filterFn()" placeholder="Filter">
+          </div>
+          DepartementID</th>
+        <th>
+          <div class="d-flex flex-row">
+            <input [(ngModel)]="departementNameFilter" class="form-control" (keyup)="filterFn()" placeholder="Filter">
+          </div>
+          Departement Name</th>
+        <th>Options</th>
+
+    </tr>
+</thead>
+<tbody>
+    <tr *ngFor="let departementItem of departementlist">
+        <td>{{ departementItem.DepartementId }}</td>
+        <td>{{departementItem.DepartementName}}</td>
+        <td>
+          <button type="button"
+          class="btn btn-warning mx-1"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          (click)="updateClick(departementItem)"
+          data-backdrop="static"
+          data-keyboard="false">
+        Edit
+        </button>
+            <button class="btn btn-danger mx-1" type="button" (click)="deleteClick(departementItem)">Delete</button>
+          </td>
+    </tr>    
+</tbody>
+</table>
